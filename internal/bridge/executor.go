@@ -59,6 +59,13 @@ func (s *Service) prepareWithCredential(r ExecutorRequest, c Credential) (map[st
 // upstream request paths read provider, while others read providerOptions.gateway.
 func (s *Service) applyProviderRouting(j map[string]any, alias string) {
 	cfg := s.config()
+
+	if cfg.ProviderPolicy == ProviderPolicyDisabled {
+		delete(j, "providerOptions")
+		delete(j, "provider")
+		return
+	}
+
 	for _, model := range cfg.Models {
 		if model.ID == alias && model.RoutingMode == RoutingModeCustom {
 			applyCustomProviderRouting(j, model.ProviderOptions, cfg.ProviderPolicy)
