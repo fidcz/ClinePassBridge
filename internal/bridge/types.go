@@ -222,8 +222,10 @@ func (c *Config) validate() error {
 	if c.ProviderPolicy == "" {
 		c.ProviderPolicy = ProviderPolicyConfig
 	}
-	if c.ProviderPolicy != ProviderPolicyClient && c.ProviderPolicy != ProviderPolicyConfig {
-		return fail(400, "provider_policy must be client or config")
+	if c.ProviderPolicy != ProviderPolicyClient &&
+		c.ProviderPolicy != ProviderPolicyConfig &&
+		c.ProviderPolicy != ProviderPolicyDisabled {
+		return fail(400, "provider_policy must be client, config or disabled")
 	}
 	seen := map[string]bool{}
 	for i := range c.Models {
