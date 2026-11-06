@@ -22,6 +22,8 @@ const (
 	// ProviderPolicyConfig uses configured providers and capability filters,
 	// ignoring caller overrides. This is the default policy.
 	ProviderPolicyConfig = "config"
+	// ProviderPolicyDisabled removes all provider routing parameters.
+	ProviderPolicyDisabled = "disabled"
 )
 
 // A pinned set is a routing allow-list, not a budget. Keep it small enough to
